@@ -81,7 +81,7 @@ if(mysqli_num_rows($result) > 0)
 						<a href="javascript:;" class="dropdown-item">Calendar</a>
 						<a href="javascript:;" class="dropdown-item">Setting</a>
 						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">Log Out</a>
+						<a href="../View/logout.php" class="dropdown-item">Log Out</a>
 					</div>
 				</div>
 			</div>
