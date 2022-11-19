@@ -7,6 +7,11 @@ session_start();
 if(isset($_POST['save']))               saveUser();
 if(isset($_POST['login']))              getUser();
 if(isset($_POST['add']))                addProducts();
+if(isset($_POST['delete']))             deleteProducts();
+if(isset($_POST['openTask']))           getSpecificTask($_POST['openTask']);
+if(isset($_POST['update']))             updateProduct();
+
+
 
 
 
@@ -154,7 +159,7 @@ function getProducts(){
                         <td class="ms-2">'.$row['date'].'</td>
                         <td class="">'.$row['price'].'</td>
                         <td>
-                            <form method="post" action="scripts.php">
+                            <form method="post" action="../php-scripts/scripts.php">
                                 <button type="button" id="update-btn" onclick="editTask('.$row['id'].')" class="btn bg-success text-white btn-sm btn-rounded mt-2" data-bs-toggle="modal" data-bs-target="#modal-task">
                                      <input type="hidden" name="update-id" value="'.$row['id'].'">
                                      <i class="fa-sharp fa-solid fa-pen-to-square text-white"></i>
@@ -189,5 +194,91 @@ function getProducts(){
 
 }
 
+
+function deleteProducts(){
+    $conn = connection();
+        $id = $_POST["delete-id"];
+
+        $sql = "DELETE FROM products where id = $id";
+
+        if(mysqli_query($conn, $sql)){
+            echo "Records inserted successfully.";
+        } else{
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+        }
+
+        mysqli_close($conn);
+        $_SESSION['message'] = "Task has been deleted successfully !";
+		header('location: ../View/welcome.php');
+}
+
+
+function getSpecificTask($id){
+    header('Content-Type: application/json');
+    $aResult = [];
+    // CODE HERE
+    // SQL SELECT
+    $conn = connection();
+
+    $sql = "SELECT * FROM products where id = '$id'";
+    if($result = mysqli_query($conn, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            while($row = mysqli_fetch_array($result)){
+                $aResult[0] = $row['product_name'];
+                $aResult[1] = $row['amount'];
+                $aResult[2] = $row['date'];
+                $aResult[3] = $row['price'];
+                $aResult[4] = $row['description'];
+                $aResult[5] = $row['filename'];
+
+            }
+            // Free result set
+            mysqli_free_result($result);
+        }
+    }
+
+    // Close connection
+    mysqli_close($conn);
+    echo json_encode($aResult);
+}
+
+
+function updateProduct(){
+    //CODE HERE
+    //SQL UPDATE
+    $conn = connection();
+    //CODE HERE
+    $update_id = $_POST['product-id'];
+    $product_name = $_POST['product-name'];
+    $product_amount = $_POST['product-amount'];
+    $product_date = $_POST['date'];
+    $product_price = $_POST['product-price'];
+    $description = $_POST['description'];
+
+    $filename = $_FILES["uploadfile"]["name"];
+    $tempname = $_FILES["uploadfile"]["tmp_name"];
+    $folder = "./image/" . $filename;
+
+
+    $sql = "UPDATE products  SET `product_name`='$product_name', `amount`='$product_amount', `filename`='$filename', `date`='$product_date', `price`='$product_price', `description`='$description' WHERE id = '$update_id'";
+
+    if(mysqli_query($conn, $sql)){
+        echo "Records inserted successfully.";
+    } else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+    }
+
+    if (move_uploaded_file($tempname, $folder)) {
+        echo "<h3>  Image uploaded successfully!</h3>";
+    } else {
+        echo "<h3>  Failed to upload image!</h3>";
+    }
+
+    mysqli_close($conn);
+
+
+    $_SESSION['message'] = "Task has been updated successfully !";
+    header('location: ../View/welcome.php');
+}
 
 ?>

@@ -254,7 +254,6 @@ if(mysqli_num_rows($result) > 0)
 					<div class="modal-footer">
 						<a href="#" class="btn btn-white" data-bs-dismiss="modal">Cancel</a>
 						<button type="submit" name="delete" class="d-none" id="buttonDelete"></a>
-						<!-- <button type="submit" onclick="deleteTask()" name="delete" class="btn btn-danger task-action-btn" id="task-delete-btn">Delete</a> -->
 						<button type="submit" name="update" class="btn btn-warning task-action-btn" id="task-update-btn">Update</a>
 						<button type="submit" name="add" class="btn btn-primary task-action-btn" id="task-save-btn">ADD</button>
 					</div>
@@ -270,7 +269,7 @@ if(mysqli_num_rows($result) > 0)
 	<script src="../assets/js/vendor.min.js"></script>
 	<script src="../assets/js/app.min.js"></script>
 	<!-- ================== END core-js ================== -->
-	<!-- <script src="scripts.js"></script> -->
+	<script src="../js/scripts.js"></script>
 	
 </body>
 </html>
