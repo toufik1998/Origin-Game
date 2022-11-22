@@ -291,7 +291,12 @@ function getTotalPrice()
     $sql = "SELECT SUM(price) FROM products";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_fetch_assoc($result);
-    echo($count["SUM(price)"]);
+    if($count["SUM(price)"] == 0){
+        echo "0";
+    }else{
+        echo($count["SUM(price)"]);
+    }
+    
      
     // Close connection
     mysqli_close($conn);
