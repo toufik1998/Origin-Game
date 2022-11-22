@@ -33,6 +33,7 @@
                                 <input type="password" name="password" data-parsley-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" class="form-control item" id="password" placeholder="Password" required>
                             </div>
                             <div class="form-group">
+                                <p>Choice an image:</p>
                                 <input type="file" name="uploadfile" class="form-control" id="admin-image" />
                             </div>
                             

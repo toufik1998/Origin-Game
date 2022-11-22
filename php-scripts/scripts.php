@@ -281,4 +281,39 @@ function updateProduct(){
     header('location: ../View/welcome.php');
 }
 
+
+function getTotalPrice()
+{
+    //CODE HERE
+    //SQL UPDATE
+    $conn = connection();
+
+    $sql = "SELECT SUM(price) FROM products";
+    $result = mysqli_query($conn, $sql);
+    $count = mysqli_fetch_assoc($result);
+    echo($count["SUM(price)"]);
+     
+    // Close connection
+    mysqli_close($conn);
+}
+
+function getCountProducts()
+{
+    //CODE HERE
+    //SQL UPDATE
+    $conn = connection();
+
+    $sql = "SELECT * FROM products";
+    $result = mysqli_query($conn, $sql);
+    $count = mysqli_num_rows($result);
+    echo $count;
+     
+    // Close connection
+    mysqli_close($conn);
+}
+
+
+
+
+
 ?>

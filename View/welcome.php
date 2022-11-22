@@ -74,11 +74,6 @@ if(mysqli_num_rows($result) > 0)
 					</a>
 					<div class="dropdown-menu dropdown-menu-end me-1">
 						<a href="javascript:;" class="dropdown-item">Edit Profile</a>
-						<a href="javascript:;" class="dropdown-item d-flex align-items-center">
-							Inbox
-							<span class="badge bg-danger rounded-pill ms-auto pb-4px">2</span> 
-						</a>
-						<a href="javascript:;" class="dropdown-item">Calendar</a>
 						<a href="javascript:;" class="dropdown-item">Setting</a>
 						<div class="dropdown-divider"></div>
 						<a href="../View/logout.php" class="dropdown-item">Log Out</a>
@@ -174,8 +169,58 @@ if(mysqli_num_rows($result) > 0)
 				<a href="#modal-task" id="addButton" data-bs-toggle="modal" class="btn btn-rounded text-white px-4 rounded-pill" style="background-color: #663DAD"><i class="fa fa-plus fa-lg me-2 ms-n2 text-white"></i> Add Product</a>
 				</div>
 			</div>
-			
 
+			<div class="container-fluid">
+				<section>
+					<div class="row">
+						<div class="col-12 mt-3 mb-1">
+							<h5 class="text-uppercase">Minimal Statistics</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xl-3 col-sm-6 col-12 mb-4">
+							<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+								<div class="align-self-center">
+									<i class="fa-solid fa-chart-bar text-info fa-3x"></i>
+								</div>
+								<div class="text-end">
+									<h3>
+										<?php
+											getCountProducts();
+										?>
+									</h3>
+									<p class="mb-0">Products</p>
+								</div>
+								</div>
+							</div>
+							</div>
+						</div>
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+								<div class="align-self-center">
+									<i class="fa-solid fa-money-check-dollar text-warning fa-3x"></i>
+								</div>
+								<div class="text-end">
+									<h3>
+										<?php
+											getTotalPrice();
+										?>
+									</h3>
+									<p class="mb-0">Total Price</p>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+										
+				</section>
+			</div>
+			
+			<!-- section of table -->
 			<div class="container-fluid my-5 section-table">
 				<div class="row">
 					<div class="col">
